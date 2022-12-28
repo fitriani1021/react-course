@@ -22,31 +22,26 @@ const AddType = ({onNavigate, setTypes}) => {
     };
 
     return (
-        <>
-            <header className="App-header">
-                <StyledTitle>Add Type</StyledTitle>
-            </header>
-            <StyledContainer>
-                <Form>
-                    <FormInput
-                        label="Course Type"
-                        type="text"
-                        value={getter["typeName"]}
-                        onChange={setter["typeName"]}
-                        placeholder="Enter Course Type Name"
-                        key="typeName"
-                    />
-                    <ButtonGroup>
-                        <Button variant="success" onClick={handleSubmit} disabled={getter.isDisable}>
-                            Submit
-                        </Button>
-                        <Button variant="secondary" onClick={() => onNavigate("/course-type")}>
-                            Cancel
-                        </Button>
-                    </ButtonGroup>
-                </Form>
-            </StyledContainer>
-        </>
+        <StyledContainer>
+            <Form>
+                <FormInput
+                    label="Course Type"
+                    type="text"
+                    value={getter["typeName"]}
+                    onChange={setter["typeName"]}
+                    placeholder="Enter Course Type Name"
+                    key="typeName"
+                />
+                <ButtonGroup>
+                    <Button variant="success" onClick={handleSubmit} disabled={getter.isDisable}>
+                        Submit
+                    </Button>
+                    <Button variant="secondary" onClick={() => onNavigate("/course-type")}>
+                        Cancel
+                    </Button>
+                </ButtonGroup>
+            </Form>
+        </StyledContainer>
     )
 }
 
