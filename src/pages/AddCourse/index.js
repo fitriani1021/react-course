@@ -18,7 +18,6 @@ const FORM_LIST = [
 
 const AddCourse = ({onNavigate, setCourses}) => {
     const { getter, setter } = useAddCourse();
-
     const handleSubmit = () => {
         setCourses((prevState) => {
             const newCourses = {...prevState};
@@ -34,29 +33,33 @@ const AddCourse = ({onNavigate, setCourses}) => {
     }
 
     return (
-        <StyledContainer>
-            <StyledTitle>Add Course</StyledTitle>
-            <Form>
-                { FORM_LIST.map(item => (
-                    <FormInput
-                        label={item.label}
-                        type={item.type}
-                        value={getter[item.id]}
-                        onChange={setter[item.id]}
-                        placeholder={item.placeholder}
-                        key={item.id}
-                    />
-                )) }
-                <ButtonGroup>
-                    <Button variant="success" onClick={handleSubmit} disabled={getter.isDisable}>
-                        Submit
-                    </Button>
-                    <Button variant="secondary" onClick={() => onNavigate("/")}>
-                        Cancel
-                    </Button>
-                </ButtonGroup>
-            </Form>
-        </StyledContainer>
+        <>
+            <header className="App-header">
+                <StyledTitle>Add Course</StyledTitle>
+            </header>
+            <StyledContainer>
+                <Form>
+                    { FORM_LIST.map(item => (
+                        <FormInput
+                            label={item.label}
+                            type={item.type}
+                            value={getter[item.id]}
+                            onChange={setter[item.id]}
+                            placeholder={item.placeholder}
+                            key={item.id}
+                        />
+                    )) }
+                    <ButtonGroup>
+                        <Button variant="success" onClick={handleSubmit} disabled={getter.isDisable}>
+                            Submit
+                        </Button>
+                        <Button variant="secondary" onClick={() => onNavigate("/")}>
+                            Cancel
+                        </Button>
+                    </ButtonGroup>
+                </Form>
+            </StyledContainer>
+        </>
     )
 }
 

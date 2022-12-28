@@ -4,7 +4,7 @@ import {StyledContainer, EmptyState, Pagination} from "../components";
 
 export default (ListComponent, opts) => {
     return (props) => {
-        const { listData, label } = opts;
+        const { listData, label, targetLabel } = opts;
         const [data, setData] = React.useState(listData);
         const [currentPage, setCurrentPage] = React.useState(1);
         const [recordsPerPage] = React.useState(3);
@@ -16,8 +16,12 @@ export default (ListComponent, opts) => {
 
         return (
             <>
+                <header className="App-header">
+                    <h1>{label} List</h1>
+                </header>
                 <StyledContainer>
-                    <Button variant="success" onClick={() => props.onNavigate(opts.navAdd)}>Add {label}</Button>
+                    <Button variant="outline-success" onClick={() => props.onNavigate(opts.navAdd)}>Add {label}</Button>
+                    <Button variant="outline-success" onClick={() => props.onNavigate(opts.targetNavAdd)}>Add {targetLabel}</Button>
                     {currentRecords?.length > 0 ? (
                         <ListComponent data={currentRecords} />
                     ): <EmptyState text={`Data ${label} Kosong...`} />}
