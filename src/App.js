@@ -3,8 +3,6 @@ import './App.css';
 import {
     AddCourse, AddType, CourseList, TypeList
 } from "./pages";
-import courseList from "./fixtures/courseList.json";
-import typeList from "./fixtures/courseType.json";
 import {NavBar} from "./components";
 import constants from "./constants";
 import EditCourse from "./pages/EditCourse";
@@ -12,8 +10,6 @@ import {Provider} from "react-redux";
 import store from "./store/store";
 
 function App() {
-    const [courses, setCourses] = React.useState(courseList);
-    const [types, setTypes] = React.useState(typeList);
     const [nav, setNav] = React.useState("/");
     const [params, setParams] = React.useState(null);
     let Component;

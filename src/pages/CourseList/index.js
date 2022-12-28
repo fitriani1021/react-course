@@ -38,13 +38,12 @@ const List = ({data, onNavigate}) => {
 
 const mapStateToProps = (state) => {
     return {
-        listData: state.courses.courseList
+        listData: state.courses.courseList,
+        pagination: state.courses.pagination
     }
 }
 
 export default connect(mapStateToProps)(withPaginationList(List, {
     label: "Course",
-    navAdd: "/add-course",
-    targetLabel: "Course Type",
-    targetNavAdd: "/add-course-type"
+    navAdd: "/add-course"
 }));

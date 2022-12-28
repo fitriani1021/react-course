@@ -3,21 +3,14 @@ import {
     Form, Button, ButtonGroup
 } from "react-bootstrap";
 import {FormInput, StyledContainer} from "../../components";
-import {StyledTitle} from "../AddCourse/styles";
 import useAddType from "./useAddType";
+import {addCourseType} from "../../store/actions/courseTypesAction";
+import {connect} from "react-redux";
 
-const AddType = ({onNavigate, setTypes}) => {
+const AddType = ({onNavigate, addType}) => {
     const {getter, setter} = useAddType();
     const handleSubmit = () => {
-        setTypes((prevState) => {
-            const newTypes = {...prevState};
-            const payload = {
-                ...getter,
-                courseTypeId: Math.random().toString()
-            }
-            newTypes?.data?.push(payload);
-            return newTypes;
-        })
+        addType(getter)
         onNavigate("/course-type");
     };
 
@@ -45,4 +38,10 @@ const AddType = ({onNavigate, setTypes}) => {
     )
 }
 
-export default AddType
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addType: (data) => dispatch(addCourseType(data))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(AddType);

@@ -3,9 +3,8 @@ import {ButtonGroup, Form, Button} from "react-bootstrap";
 import {FormInput, StyledContainer} from "../../components";
 import constants from "../../constants";
 import {getCourseById} from "../../services/courseApi";
-import {deleteCourse, editCourse} from "../../store/actions/coursesAction"
+import {editCourse} from "../../store/actions/coursesAction"
 import {connect} from "react-redux";
-import data from "bootstrap/js/src/dom/data";
 
 const initialData = {
     title: "",
@@ -21,7 +20,6 @@ const EditCourse = ({onNavigate, params, editCourse}) => {
 
     React.useEffect(() => {
         const  course = getCourseById(params.id);
-        console.log(params.id)
         setData(course)
     },[params.id])
 
@@ -71,7 +69,7 @@ const EditCourse = ({onNavigate, params, editCourse}) => {
                     label={"Course Type Id"}
                     type={"text"}
                     placeholder={"Enter course type"}
-                    value={data.courseTypeId}
+                    value={data?.courseType?.courseTypeId}
                     disabled={true}
                 />
                 <FormInput
@@ -84,14 +82,14 @@ const EditCourse = ({onNavigate, params, editCourse}) => {
                     label={"Duration"}
                     type={"text"}
                     placeholder={"Enter duration"}
-                    value={data.duration}
+                    value={data?.courseInfo?.duration}
                     onChange={handleChange("duration")}
                 />
                 <FormInput
                     label={"Level"}
                     type={"text"}
                     placeholder={"Enter level"}
-                    value={data.level}
+                    value={data?.courseInfo?.level}
                     onChange={handleChange("level")}
                 />
 

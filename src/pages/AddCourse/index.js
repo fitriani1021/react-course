@@ -4,8 +4,9 @@ import {
 } from "react-bootstrap";
 import {FormInput, StyledContainer} from "../../components";
 
-import {StyledTitle} from "./styles";
 import useAddCourse from "./useAddCourse";
+import {addCourse} from "../../store/actions/coursesAction";
+import {connect} from "react-redux";
 
 const FORM_LIST = [
     {id: "title", label: "Title", type: "text", placeholder: "Enter course title"},
@@ -16,18 +17,10 @@ const FORM_LIST = [
     {id: "duration", label: "Duration", type: "text", placeholder: "Enter course duration"}
 ]
 
-const AddCourse = ({onNavigate, setCourses}) => {
+const AddCourse = ({onNavigate, addCourse}) => {
     const {getter, setter} = useAddCourse();
     const handleSubmit = () => {
-        setCourses((prevState) => {
-            const newCourses = {...prevState};
-            const payload = {
-                ...getter,
-                courseId: Math.random().toString()
-            }
-            newCourses?.data?.push(payload);
-            return newCourses;
-        })
+        addCourse(getter);
 
         onNavigate("/");
     }
@@ -58,4 +51,10 @@ const AddCourse = ({onNavigate, setCourses}) => {
     )
 }
 
-export default AddCourse;
+const mapDispatchToProps =(dispatch) => {
+    return {
+        addCourse: (data) => dispatch(addCourse(data))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(AddCourse);
