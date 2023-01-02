@@ -6,12 +6,15 @@ import {FormInput, StyledContainer} from "../../components";
 import useAddType from "./useAddType";
 import {addCourseType} from "../../store/actions/courseTypesAction";
 import {connect} from "react-redux";
+import {useNavigate} from "react-router-dom";
+import constants from "../../constants";
 
-const AddType = ({onNavigate, addType}) => {
+const AddType = ({addType}) => {
+    const onNavigate = useNavigate();
     const {getter, setter} = useAddType();
     const handleSubmit = () => {
         addType(getter)
-        onNavigate("/course-type");
+        onNavigate(constants.ROUTES.COURSE_TYPE);
     };
 
     return (
@@ -29,7 +32,7 @@ const AddType = ({onNavigate, addType}) => {
                     <Button variant="success" onClick={handleSubmit} disabled={getter.isDisable}>
                         Submit
                     </Button>
-                    <Button variant="secondary" onClick={() => onNavigate("/course-type")}>
+                    <Button variant="secondary" onClick={() => onNavigate(constants.ROUTES.COURSE_TYPE)}>
                         Cancel
                     </Button>
                 </ButtonGroup>

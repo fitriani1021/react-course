@@ -24,5 +24,5 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps)(withPaginationList(List, {
     label: "Course Type",
-    navAdd: "/add-course-type"
+    navAdd: "/type/add"
 }));

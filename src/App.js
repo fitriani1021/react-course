@@ -8,12 +8,12 @@ import constants from "./constants";
 import EditCourse from "./pages/EditCourse";
 import {Provider} from "react-redux";
 import store from "./store/store";
-import {createBrowserRouter, Outlet, RouterProvider} from "react-router-dom";
+import {createBrowserRouter, Outlet, RouterProvider, useNavigate} from "react-router-dom";
 
 function Course() {
     return(
         <div>
-            <h1>Course Page</h1>
+            {/*<h1>Course Page</h1>*/}
             <Outlet/>
         </div>
     )
@@ -21,7 +21,7 @@ function Course() {
 function CourseType() {
     return(
         <div>
-            <h1>Course Type Page</h1>
+            {/*<h1>Course Type Page</h1>*/}
             <Outlet/>
         </div>
     )
@@ -45,7 +45,8 @@ const appRouter = createBrowserRouter([
             { path: constants.ROUTES.COURSE_LIST, element: <Course />,
               children: [
                   { index: true, element: <CourseList />},
-                  { path: constants.ROUTES.ADD_COURSE, element: <AddCourse /> }
+                  { path: constants.ROUTES.ADD_COURSE, element: <AddCourse /> },
+                  { path: `${constants.ROUTES.EDIT_COURSE}/:id?`, element: <EditCourse />}
               ]},
             { path: constants.ROUTES.COURSE_TYPE, element: <CourseType />,
               children: [

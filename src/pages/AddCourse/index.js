@@ -7,6 +7,8 @@ import {FormInput, StyledContainer} from "../../components";
 import useAddCourse from "./useAddCourse";
 import {addCourse} from "../../store/actions/coursesAction";
 import {connect} from "react-redux";
+import {useNavigate} from "react-router-dom";
+import constants from "../../constants";
 
 const FORM_LIST = [
     {id: "title", label: "Title", type: "text", placeholder: "Enter course title"},
@@ -17,12 +19,13 @@ const FORM_LIST = [
     {id: "duration", label: "Duration", type: "text", placeholder: "Enter course duration"}
 ]
 
-const AddCourse = ({onNavigate, addCourse}) => {
+const AddCourse = ({addCourse}) => {
+    const onNavigate = useNavigate();
     const {getter, setter} = useAddCourse();
     const handleSubmit = () => {
         addCourse(getter);
 
-        onNavigate("/");
+        onNavigate(constants.ROUTES.COURSE_LIST);
     }
 
     return (
@@ -42,7 +45,7 @@ const AddCourse = ({onNavigate, addCourse}) => {
                     <Button variant="success" onClick={handleSubmit} disabled={getter.isDisable}>
                         Submit
                     </Button>
-                    <Button variant="secondary" onClick={() => onNavigate("/")}>
+                    <Button variant="secondary" onClick={() => onNavigate(constants.ROUTES.COURSE_LIST)}>
                         Cancel
                     </Button>
                 </ButtonGroup>

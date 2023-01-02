@@ -9,12 +9,12 @@ import constants from "../../constants";
 import {deleteCourse} from "../../store/actions/coursesAction";
 import {useLocation, useNavigate} from "react-router-dom";
 
-const List = ({data, onNavigate}) => {
+const List = ({data, onNavigate, id}) => {
     const dispatch = useDispatch();
     onNavigate = useNavigate();
 
     const onNavigateToEdit = (id) => () => {
-        onNavigate(constants.ROUTES.EDIT_COURSE,{id});
+        onNavigate(`${constants.ROUTES.EDIT_COURSE}/${id}`);
     }
 
     const onDelete = (id) => () => {

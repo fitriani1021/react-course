@@ -5,6 +5,7 @@ import constants from "../../constants";
 import {getCourseById} from "../../services/courseApi";
 import {editCourse} from "../../store/actions/coursesAction"
 import {connect} from "react-redux";
+import {useNavigate, useParams} from "react-router-dom";
 
 const initialData = {
     title: "",
@@ -15,11 +16,13 @@ const initialData = {
     level: "",
 }
 
-const EditCourse = ({onNavigate, params, editCourse}) => {
+const EditCourse = ({editCourse}) => {
     const [data, setData] = React.useState(initialData);
+    const params = useParams();
+    const onNavigate = useNavigate();
 
     React.useEffect(() => {
-        const  course = getCourseById(params.id);
+        const course = getCourseById(params?.id);
         setData(course)
     },[params.id])
 
