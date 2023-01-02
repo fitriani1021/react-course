@@ -18,14 +18,16 @@ export default (ListComponent, opts) => {
                 <StyledContainer>
                     <Button variant="outline-success" onClick={() => props.onNavigate(opts.navAdd)}>Add {label}</Button>
                     {currentRecords?.length > 0 ? (
+                        <>
                         <ListComponent {...props} data={currentRecords} />
-                    ): <EmptyState text={`Data ${label} Kosong...`} />}
+
+                        <Pagination
+                            totalPage={totalPage}
+                            onChangeCurrentPage={setCurrentPage}
+                            currentPage={currentPage}
+                        />
+                        </>) : <EmptyState text={`Data ${label} Kosong...`} />}
                 </StyledContainer>
-                <Pagination
-                    totalPage={totalPage}
-                    onChangeCurrentPage={setCurrentPage}
-                    currentPage={currentPage}
-                />
             </>
         )
     }

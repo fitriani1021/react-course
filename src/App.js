@@ -13,7 +13,6 @@ function App() {
     const [nav, setNav] = React.useState("/");
     const [params, setParams] = React.useState(null);
     let Component;
-    let props = {};
 
     const onNavigate = (route, params = null) => {
         setNav(route);
