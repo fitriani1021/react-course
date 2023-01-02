@@ -6,11 +6,14 @@ const constants = {
         DELETE_COURSE: "DELETE_COURSE",
     },
     ROUTES: {
-        COURSE_LIST: "/",
-        COURSE_TYPE: "/course-type",
+        COURSE_LIST: "/course",
+        COURSE_TYPE: "/type",
 
-        ADD_COURSE: "/add-course",
-        EDIT_COURSE: "/edit-course"
+        ADD_COURSE: "/course/add",
+        ADD_TYPE: "/type/add",
+        EDIT_COURSE: "/course/edit",
+        DASHBOARD: "/",
+        LOGIN: "/login"
     }
 }
 

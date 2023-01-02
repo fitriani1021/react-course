@@ -1,54 +1,67 @@
 import React from 'react';
 import './App.css';
 import {
-    AddCourse, AddType, CourseList, TypeList
+    AddCourse, AddType, CourseList, Dashboard, TypeList
 } from "./pages";
 import {NavBar} from "./components";
 import constants from "./constants";
 import EditCourse from "./pages/EditCourse";
 import {Provider} from "react-redux";
 import store from "./store/store";
+import {createBrowserRouter, Outlet, RouterProvider} from "react-router-dom";
+
+function Course() {
+    return(
+        <div>
+            <h1>Course Page</h1>
+            <Outlet/>
+        </div>
+    )
+}
+function CourseType() {
+    return(
+        <div>
+            <h1>Course Type Page</h1>
+            <Outlet/>
+        </div>
+    )
+}
+function Layout() {
+    return(
+        <div>
+            <NavBar/>
+            <hr/>
+            <Outlet/>
+        </div>
+    )
+}
+
+const appRouter = createBrowserRouter([
+    {
+        path: constants.ROUTES.DASHBOARD,
+        element: <Layout/>,
+        children: [
+            { index: true, element: <Dashboard /> },
+            { path: constants.ROUTES.COURSE_LIST, element: <Course />,
+              children: [
+                  { index: true, element: <CourseList />},
+                  { path: constants.ROUTES.ADD_COURSE, element: <AddCourse /> }
+              ]},
+            { path: constants.ROUTES.COURSE_TYPE, element: <CourseType />,
+              children: [
+                  { index: true, element: <TypeList /> },
+                  {path: constants.ROUTES.ADD_TYPE, element: <AddType /> }
+              ]},
+        ]
+    },
+    { path: "*", element: <h3>Page is not found</h3>}
+])
 
 function App() {
-    const [nav, setNav] = React.useState("/");
-    const [params, setParams] = React.useState(null);
-    let Component;
-
-    const onNavigate = (route, params = null) => {
-        setNav(route);
-        setParams(params);
-    }
-
-    const menu = [
-        {name: "Course List", onNavigate: () => setNav(constants.ROUTES.COURSE_LIST)},
-        {name: "Course Type", onNavigate: () => setNav(constants.ROUTES.COURSE_TYPE)},
-    ]
-
-    switch (nav) {
-        case "/":
-            Component = CourseList;
-            break;
-        case constants.ROUTES.ADD_COURSE:
-            Component = AddCourse;
-            break;
-        case "/course-type":
-            Component = TypeList;
-            break;
-        case "/add-course-type":
-            Component = AddType;
-            break;
-        case constants.ROUTES.EDIT_COURSE:
-            Component = EditCourse;
-            break;
-        default:
-            Component = CourseList;
-            break;
-    }
 
   return (
     <Provider store={store}>
-        <NavBar menu={menu} />
-      <Component onNavigate={onNavigate} params={params} />
+        <RouterProvider router={appRouter} />
     </Provider>
   );
 }

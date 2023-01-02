@@ -7,9 +7,11 @@ import withPaginationList from "../../hoc/withPaginationList";
 import {useDispatch} from "react-redux";
 import constants from "../../constants";
 import {deleteCourse} from "../../store/actions/coursesAction";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const List = ({data, onNavigate}) => {
     const dispatch = useDispatch();
+    onNavigate = useNavigate();
 
     const onNavigateToEdit = (id) => () => {
         onNavigate(constants.ROUTES.EDIT_COURSE,{id});
@@ -45,5 +47,5 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps)(withPaginationList(List, {
     label: "Course",
-    navAdd: "/add-course"
+    navAdd: "/course/add"
 }));
